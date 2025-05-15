@@ -6,6 +6,7 @@ import ActiveTasks from './pages/ActiveTasks';
 import FinishedTasks from './pages/FinishedTasks';
 import TaskDetail from './pages/TaskDetail';
 import Settings from './pages/Settings';
+import NavBar from './components/NavBar';
 import './App.css'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/task/:id" element={<TaskDetail />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>
+      <NavBar />
     </Router>
   );
 }
