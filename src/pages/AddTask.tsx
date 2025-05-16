@@ -5,10 +5,11 @@ import { generateSmartReminders } from '../utils/reminders';
 
 export default function AddTask() {
   const navigate = useNavigate();
+  const defaultReminderCount = Number(localStorage.getItem('reminderCount')) || 3;
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
   const [due, setDue] = useState('');
-  const reminderCount = Number(localStorage.getItem('reminderCount')) || 3;
+  const [reminderCount, setReminderCount] = useState(defaultReminderCount);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,6 +78,20 @@ export default function AddTask() {
               className="form-input"
               required
             />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">通知回数</label>
+            <select
+              value={reminderCount}
+              onChange={e => setReminderCount(Number(e.target.value))}
+              className="form-input"
+              style={{maxWidth: 140}}
+            >
+              {[3,4,5,6,7,8,9].map(n => (
+                <option key={n} value={n}>{n} 回</option>
+              ))}
+            </select>
           </div>
 
           <button type="submit" className="btn-primary">Set</button>

@@ -56,7 +56,7 @@ export default function Settings() {
           </div>
         </div>
         <div className="form-group">
-          <label className="form-label">通知回数</label>
+          <label className="form-label">デフォルト通知回数</label>
           <select
             value={reminderCount}
             onChange={e => setReminderCount(Number(e.target.value))}

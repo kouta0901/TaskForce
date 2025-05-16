@@ -84,6 +84,40 @@ body, .app-bg {
 .btn-primary:hover {
   background: #5b8ee6;
 }
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background: #7CA8FF;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-secondary:hover {
+  background: #5b8ee6;
+}
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background: #d32f2f;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-danger:hover {
+  background: #b71c1c;
+}
 
 /* --- ナビゲーション --- */
 .navbar {
@@ -125,24 +159,6 @@ body, .app-bg {
   margin-top: 32px;
 }
 
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff;
-  background: #7CA8FF;
-  box-shadow: none;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.btn-secondary:hover {
-  background: #5b8ee6;
-}
-
 /* --- タスク追加・タスク詳細・設定ページ用 --- */
 .form-container {
   max-width: 480px;
@@ -174,23 +190,6 @@ body, .app-bg {
 .form-actions {
   display: flex;
   gap: 16px;
-}
-.btn-danger {
-  display: inline-flex;
-  align-items: center;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff;
-  background: #d32f2f;
-  box-shadow: none;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.btn-danger:hover {
-  background: #b71c1c;
 }
 
 /* --- タスク一覧用 --- */
