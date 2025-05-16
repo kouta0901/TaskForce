@@ -71,7 +71,7 @@ export default function AddTask() {
               期限
             </label>
             <input
-              type="datetime-local"
+              type="date"
               id="due"
               value={due}
               onChange={(e) => setDue(e.target.value)}
@@ -94,7 +94,7 @@ export default function AddTask() {
             </select>
           </div>
 
-          <button type="submit" className="btn-primary">Set</button>
+          <button type="submit" className="btn-primary" style={{background:'#343434', color:'#fff'}}>Set</button>
         </form>
       </div>
     </div>

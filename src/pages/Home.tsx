@@ -11,6 +11,7 @@ export default function Home() {
           <Link
             to="/add"
             className="btn-primary"
+            style={{background:'#343434', color:'#fff'}}
           >
             Set Goal
           </Link>

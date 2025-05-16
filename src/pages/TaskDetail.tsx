@@ -63,11 +63,9 @@ export default function TaskDetail() {
         <button onClick={()=>navigate(-1)} style={{position:'absolute', top:16, left:16, background:'none', border:'none', fontSize:24, cursor:'pointer', color:'#888'}} aria-label="閉じる">×</button>
         <h2 className="heading-main" style={{color:'#222', textAlign:'center'}}>Goalの詳細</h2>
         <div style={{textAlign:'center', marginBottom:16, fontWeight:'bold'}}>残り通知回数: {remainingReminders}回</div>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="title" className="form-label" style={{color:'#222'}}>
-              タイトル
-            </label>
+        <form onSubmit={handleSubmit} style={{display:'flex', flexDirection:'column', alignItems:'center', width:'100%'}}>
+          <div className="form-group" style={{width:'100%'}}>
+            <label htmlFor="title" className="form-label" style={{color:'#222', textAlign:'center', display:'block'}}>タイトル</label>
             <input
               type="text"
               id="title"
@@ -75,47 +73,41 @@ export default function TaskDetail() {
               onChange={(e) => setTitle(e.target.value)}
               className="form-input"
               required
-              style={{color:'#fff'}}
+              style={{color:'#fff', width:'100%', textAlign:'left'}}
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="detail" className="form-label" style={{color:'#222'}}>
-              詳細
-            </label>
+          <div className="form-group" style={{width:'100%'}}>
+            <label htmlFor="detail" className="form-label" style={{color:'#222', textAlign:'center', display:'block'}}>詳細</label>
             <textarea
               id="detail"
               value={detail}
               onChange={(e) => setDetail(e.target.value)}
               className="form-input"
               rows={4}
-              style={{color:'#fff'}}
+              style={{color:'#fff', width:'100%', textAlign:'left'}}
             />
           </div>
 
-          <div className="form-group">
-            <label htmlFor="due" className="form-label" style={{color:'#222'}}>
-              期限
-            </label>
+          <div className="form-group" style={{width:'100%'}}>
+            <label htmlFor="due" className="form-label" style={{color:'#222', textAlign:'center', display:'block'}}>期限</label>
             <input
-              type="datetime-local"
+              type="date"
               id="due"
               value={due}
               onChange={(e) => setDue(e.target.value)}
               className="form-input"
               required
-              style={{color:'#fff'}}
+              style={{color:'#fff', width:'100%', textAlign:'left'}}
             />
           </div>
 
-          <div style={{display:'flex', justifyContent:'space-between', marginTop:32}}>
-            <button type="submit" style={{background:'#343434', color:'#fff', border:'none', borderRadius:8, padding:'12px 24px', fontWeight:'bold', fontSize:16, minWidth:100}}>
-              保存
-            </button>
+          <div style={{display:'flex', justifyContent:'space-between', marginTop:32, width:'100%'}}>
+            <button type="submit" style={{background:'#343434', color:'#fff', border:'none', borderRadius:8, padding:'12px 24px', fontWeight:'bold', fontSize:16, minWidth:100, marginRight:'auto'}}>保存</button>
             <button
               type="button"
               onClick={toggleDone}
-              style={{background:'#343434', color:'#fff', border:'none', borderRadius:8, padding:'12px 24px', fontWeight:'bold', fontSize:16, minWidth:100}}
+              style={{background:'#343434', color:'#fff', border:'none', borderRadius:8, padding:'12px 24px', fontWeight:'bold', fontSize:16, minWidth:100, marginLeft:'auto'}}
             >
               {task.done ? '未完了に戻す' : '完了にする'}
             </button>
