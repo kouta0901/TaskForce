@@ -7,6 +7,7 @@ import FinishedTasks from './pages/FinishedTasks';
 import TaskDetail from './pages/TaskDetail';
 import Settings from './pages/Settings';
 import NavBar from './components/NavBar';
+import Goal from './pages/Goal';
 import './App.css'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/add" element={<AddTask />} />
         <Route path="/active" element={<ActiveTasks />} />
         <Route path="/finished" element={<FinishedTasks />} />
+        <Route path="/goal" element={<Goal />} />
         <Route path="/task/:id" element={<TaskDetail />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>

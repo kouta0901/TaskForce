@@ -19,17 +19,30 @@ export const generateRandomReminders = (dueDate: string, count: number = 3): str
   return reminders.sort();
 };
 
-export function generateReminders(dueDate: Date): string[] {
-  const reminders: string[] = [];
-  const now = new Date();
-  const diff = dueDate.getTime() - now.getTime();
-  const hours = Math.floor(diff / (1000 * 60 * 60));
-  if (hours > 24) {
-    reminders.push(new Date(dueDate.getTime() - 24 * 60 * 60 * 1000).toISOString());
+export function generateSmartReminders(
+  deadline: Date,
+  count = 3,
+  minGapRatio = 0.3,
+  maxTrials = 100
+): string[] {
+  const now = Date.now();
+  const end = deadline.getTime();
+  if (end <= now) return [];
+
+  const total = end - now;
+  const minGap = (total / (count + 1)) * minGapRatio;
+  const reminders: number[] = [];
+
+  while (reminders.length < count && maxTrials-- > 0) {
+    const cand = now + Math.random() * total;
+    if (reminders.every(ts => Math.abs(ts - cand) >= minGap)) {
+      reminders.push(cand);
+    }
   }
-  if (hours > 1) {
-    reminders.push(new Date(dueDate.getTime() - 60 * 60 * 1000).toISOString());
+  // 足りなければ minGap 無視で埋める（安全弁）
+  while (reminders.length < count) {
+    reminders.push(now + Math.random() * total);
   }
-  reminders.push(new Date(dueDate.getTime() - 30 * 60 * 1000).toISOString());
-  return reminders;
+
+  return reminders.sort().map(ts => new Date(ts).toISOString());
 } 

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export default function Home() {
   return (
-    <div className="app-bg">
+    <div className="app-bg" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div className="container">
         <div className="text-center">
           <h1 className="heading-main">
@@ -12,7 +12,7 @@ export default function Home() {
             to="/add"
             className="btn-primary"
           >
-            タスクを登録する
+            Set Goal
           </Link>
         </div>
       </div>

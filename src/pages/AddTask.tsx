@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addTask } from '../utils/storage';
-import { generateReminders } from '../utils/reminders';
+import { generateSmartReminders } from '../utils/reminders';
 
 export default function AddTask() {
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
   const [due, setDue] = useState('');
+  const reminderCount = Number(localStorage.getItem('reminderCount')) || 3;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,7 +20,7 @@ export default function AddTask() {
       return;
     }
 
-    const reminders = generateReminders(dueDate);
+    const reminders = generateSmartReminders(dueDate, reminderCount);
     addTask({
       id: Date.now().toString(),
       title,
@@ -35,7 +36,7 @@ export default function AddTask() {
   return (
     <div className="app-bg">
       <div className="form-container">
-        <h2 className="heading-main">タスクを登録</h2>
+        <h2 className="heading-main">Set a Goal</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="title" className="form-label">
@@ -78,9 +79,7 @@ export default function AddTask() {
             />
           </div>
 
-          <button type="submit" className="btn-primary">
-            登録
-          </button>
+          <button type="submit" className="btn-primary">Set</button>
         </form>
       </div>
     </div>
