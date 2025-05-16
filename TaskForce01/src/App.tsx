@@ -1,0 +1,33 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useReminders } from './hooks/useReminders';
+import Home from './pages/Home';
+import AddTask from './pages/AddTask';
+import ActiveTasks from './pages/ActiveTasks';
+import FinishedTasks from './pages/FinishedTasks';
+import TaskDetail from './pages/TaskDetail';
+import Settings from './pages/Settings';
+import NavBar from './components/NavBar';
+import Goal from './pages/Goal';
+import './App.css'
+
+function App() {
+  // リマインダーの監視を開始
+  useReminders();
+
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/add" element={<AddTask />} />
+        <Route path="/active" element={<ActiveTasks />} />
+        <Route path="/finished" element={<FinishedTasks />} />
+        <Route path="/goal" element={<Goal />} />
+        <Route path="/task/:id" element={<TaskDetail />} />
+        <Route path="/settings" element={<Settings />} />
+      </Routes>
+      <NavBar />
+    </Router>
+  );
+}
+
+export default App;
