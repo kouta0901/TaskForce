@@ -10,6 +10,8 @@ import SwiftData
 
 @main
 struct TaskSwiftApp: App {
+    @StateObject private var taskManager = TaskManager()
+    
     init() {
         // ナビゲーションバーのカスタマイズ
         let appearance = UITabBarAppearance()
@@ -45,6 +47,7 @@ struct TaskSwiftApp: App {
                         Text("Setting")
                     }
             }
+            .environmentObject(taskManager)
             .preferredColorScheme(.dark)
         }
     }

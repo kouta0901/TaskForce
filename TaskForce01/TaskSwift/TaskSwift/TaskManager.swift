@@ -48,6 +48,17 @@ class TaskManager: ObservableObject {
         }
     }
     
+    /// tasks 配列内の Task への read-write Binding を返す
+    func binding(for task: Task) -> Binding<Task> {
+        guard let index = tasks.firstIndex(where: { $0.id == task.id }) else {
+            fatalError("Task not found")
+        }
+        return Binding(
+            get: { self.tasks[index] },
+            set: { self.tasks[index] = $0 }
+        )
+    }
+    
     func addGoal(_ goal: String) {
         goals.append(goal)
         saveGoals()
@@ -65,6 +76,12 @@ class TaskManager: ObservableObject {
             goals.remove(at: index)
             saveGoals()
         }
+    }
+    
+    /// すべてのタスクを削除する
+    func deleteAllTasks() {
+        tasks.removeAll()
+        saveTasks()
     }
     
     private func saveTasks() {
@@ -90,5 +107,22 @@ class TaskManager: ObservableObject {
         if let savedGoals = UserDefaults.standard.stringArray(forKey: "goals") {
             goals = savedGoals
         }
+    }
+}
+
+// デフォルト通知回数（必要に応じて設定値に変更可能）
+extension TaskManager {
+    var defaultReminderCount: Int { 3 }
+    
+    /// 期限までの間にランダムなリマインダー時刻を生成
+    func generateSmartReminders(dueDate: Date, count: Int) -> [Date] {
+        guard count > 0 else { return [] }
+        let now = Date()
+        let interval = dueDate.timeIntervalSince(now)
+        guard interval > 0 else { return [] }
+        // ランダムな時刻を生成
+        let randomIntervals = (1...count).map { _ in Double.random(in: 0..<interval) }
+        let sorted = randomIntervals.sorted()
+        return sorted.map { now.addingTimeInterval($0) }
     }
 } 

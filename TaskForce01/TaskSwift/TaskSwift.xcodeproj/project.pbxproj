@@ -24,6 +24,8 @@
 		CC319F0A2DD79F1000AA2CB3 /* TaskCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC319F082DD79F1000AA2CB3 /* TaskCard.swift */; };
 		CC319F0B2DD79F1000AA2CB3 /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC319F092DD79F1000AA2CB3 /* TaskDetailView.swift */; };
 		CC319F0C2DD79F1000AA2CB3 /* GoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC319F072DD79F1000AA2CB3 /* GoalView.swift */; };
+		CC319F0E2DD85E6E00AA2CB3 /* GoalFormFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC319F0D2DD85E6E00AA2CB3 /* GoalFormFields.swift */; };
+		CC319F102DD86DE700AA2CB3 /* Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC319F0F2DD86DE700AA2CB3 /* Hex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +66,8 @@
 		CC319F072DD79F1000AA2CB3 /* GoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalView.swift; sourceTree = "<group>"; };
 		CC319F082DD79F1000AA2CB3 /* TaskCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCard.swift; sourceTree = "<group>"; };
 		CC319F092DD79F1000AA2CB3 /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
+		CC319F0D2DD85E6E00AA2CB3 /* GoalFormFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalFormFields.swift; sourceTree = "<group>"; };
+		CC319F0F2DD86DE700AA2CB3 /* Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,8 +118,10 @@
 		273520E42DD78C9F000B2A64 /* TaskSwift */ = {
 			isa = PBXGroup;
 			children = (
+				CC319F0D2DD85E6E00AA2CB3 /* GoalFormFields.swift */,
 				CC319F072DD79F1000AA2CB3 /* GoalView.swift */,
 				CC319F082DD79F1000AA2CB3 /* TaskCard.swift */,
+				CC319F0F2DD86DE700AA2CB3 /* Hex.swift */,
 				CC319F092DD79F1000AA2CB3 /* TaskDetailView.swift */,
 				273520E52DD78C9F000B2A64 /* TaskSwiftApp.swift */,
 				273521152DD78D18000B2A64 /* ActiveTasksView.swift */,
@@ -294,11 +300,13 @@
 				2735211A2DD78D18000B2A64 /* SettingsView.swift in Sources */,
 				2735211C2DD78D18000B2A64 /* ActiveTasksView.swift in Sources */,
 				273520E62DD78C9F000B2A64 /* TaskSwiftApp.swift in Sources */,
+				CC319F0E2DD85E6E00AA2CB3 /* GoalFormFields.swift in Sources */,
 				2735211D2DD78D18000B2A64 /* Task.swift in Sources */,
 				273521182DD78D18000B2A64 /* AddTaskView.swift in Sources */,
 				CC319F0A2DD79F1000AA2CB3 /* TaskCard.swift in Sources */,
 				CC319F0B2DD79F1000AA2CB3 /* TaskDetailView.swift in Sources */,
 				CC319F0C2DD79F1000AA2CB3 /* GoalView.swift in Sources */,
+				CC319F102DD86DE700AA2CB3 /* Hex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

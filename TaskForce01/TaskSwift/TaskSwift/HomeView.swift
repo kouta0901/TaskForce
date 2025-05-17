@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject private var taskManager: TaskManager
     @State private var showingAddGoal = false
+    
     var body: some View {
         ZStack {
             Color(red: 108/255, green: 109/255, blue: 115/255).ignoresSafeArea()
@@ -32,4 +34,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environmentObject(TaskManager())
 } 

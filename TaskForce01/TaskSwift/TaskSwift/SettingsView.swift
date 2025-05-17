@@ -1,9 +1,11 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject private var taskManager: TaskManager
     @State private var notificationStatus = "通知する"
     @State private var reminderCount = 3
     @State private var showConfirm = false
+    
     var body: some View {
         ZStack {
             Color(red: 108/255, green: 109/255, blue: 115/255).ignoresSafeArea()
@@ -40,7 +42,7 @@ struct SettingsView: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color(hex: "#343434"))
+                        .background(Color(hex: "#dc143c"))
                         .cornerRadius(8)
                 }
                 .padding(.horizontal, 32)
@@ -64,14 +66,14 @@ struct SettingsView: View {
                         }
                         .padding(.leading, 16)
                         Button(action: {
-                            // Goal全削除処理
+                            taskManager.deleteAllTasks()
                             showConfirm = false
                         }) {
                             Text("はい")
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color(hex: "#343434"))
+                                .background(Color(hex: "#dc143c"))
                                 .cornerRadius(8)
                         }
                         .padding(.trailing, 16)
@@ -88,21 +90,7 @@ struct SettingsView: View {
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-    }
-}
-
-extension Color {
-    init(hex: String) {
-        let scanner = Scanner(string: hex)
-        _ = scanner.scanString("#")
-        var rgb: UInt64 = 0
-        scanner.scanHexInt64(&rgb)
-        let r = Double((rgb >> 16) & 0xFF) / 255.0
-        let g = Double((rgb >> 8) & 0xFF) / 255.0
-        let b = Double(rgb & 0xFF) / 255.0
-        self.init(red: r, green: g, blue: b)
-    }
+#Preview {
+    SettingsView()
+        .environmentObject(TaskManager())
 } 

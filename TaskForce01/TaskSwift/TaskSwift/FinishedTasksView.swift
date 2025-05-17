@@ -1,23 +1,25 @@
 import SwiftUI
 
 struct FinishedTasksView: View {
-    @StateObject private var taskManager = TaskManager()
+    @EnvironmentObject private var taskManager: TaskManager
+    @State private var selectedTask: Task? = nil
     
     var body: some View {
         NavigationStack {
             List(taskManager.completedTasks) { task in
-                NavigationLink(value: task) {
+                Button(action: { selectedTask = task }) {
                     TaskCard(task: task)
                 }
             }
-            .navigationDestination(for: Task.self) { task in
-                TaskDetailView(task: task)
-            }
             .navigationTitle("完了済みタスク")
+            .sheet(item: $selectedTask) { task in
+                TaskDetailView(task: taskManager.binding(for: task))
+            }
         }
     }
 }
 
 #Preview {
     FinishedTasksView()
+        .environmentObject(TaskManager())
 } 

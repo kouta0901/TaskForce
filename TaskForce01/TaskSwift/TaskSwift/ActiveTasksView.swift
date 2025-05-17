@@ -1,18 +1,16 @@
 import SwiftUI
 
 struct ActiveTasksView: View {
-    @StateObject private var taskManager = TaskManager()
+    @EnvironmentObject private var taskManager: TaskManager
     @State private var showingAddTask = false
+    @State private var selectedTask: Task? = nil
     
     var body: some View {
         NavigationStack {
             List(taskManager.activeTasks) { task in
-                NavigationLink(value: task) {
+                Button(action: { selectedTask = task }) {
                     TaskCard(task: task)
                 }
-            }
-            .navigationDestination(for: Task.self) { task in
-                TaskDetailView(task: task)
             }
             .navigationTitle("アクティブタスク")
             .toolbar {
@@ -25,10 +23,14 @@ struct ActiveTasksView: View {
             .sheet(isPresented: $showingAddTask) {
                 AddTaskView()
             }
+            .sheet(item: $selectedTask) { task in
+                TaskDetailView(task: taskManager.binding(for: task))
+            }
         }
     }
 }
 
 #Preview {
     ActiveTasksView()
+        .environmentObject(TaskManager())
 } 
