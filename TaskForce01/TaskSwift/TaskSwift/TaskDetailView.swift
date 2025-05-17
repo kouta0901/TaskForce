@@ -7,6 +7,7 @@ public struct TaskDetailView: View {
     @State private var editedTitle: String
     @State private var editedDescription: String
     @State private var editedDueDate: Date
+    @State private var showDateAlert = false
 
     public init(task: Binding<Task>) {
         self._task = task
@@ -17,7 +18,7 @@ public struct TaskDetailView: View {
 
     public var body: some View {
         VStack(spacing: 32) {
-            Text("Goalの詳細")
+            Text("進行中のGoal")
                 .sheetTitle()
 
             Text("残り通知回数: \(task.remainingReminders)回")
@@ -41,9 +42,18 @@ public struct TaskDetailView: View {
             }
         }
         .sheetCard()
+        .alert("本日以降の日付を選択してください", isPresented: $showDateAlert) {
+            Button("OK", role: .cancel) { }
+        }
     }
 
     private func saveChanges() {
+        let today = Calendar.current.startOfDay(for: Date())
+        let selected = Calendar.current.startOfDay(for: editedDueDate)
+        guard selected > today else {
+            showDateAlert = true
+            return
+        }
         task.title = editedTitle
         task.description = editedDescription
         task.dueDate = editedDueDate

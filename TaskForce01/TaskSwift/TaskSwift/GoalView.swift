@@ -7,7 +7,7 @@ struct GoalView: View {
     var body: some View {
         ZStack {
             Color(red: 108/255, green: 109/255, blue: 115/255).ignoresSafeArea()
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .center, spacing: 0) {
                 Text("Overview")
                     .font(.largeTitle).bold()
                     .foregroundColor(.white)
