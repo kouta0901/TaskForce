@@ -13,6 +13,10 @@ class TaskManager: ObservableObject {
         tasks.filter { $0.status == .completed }
     }
     
+    var finishedTasks: [Task] {
+        tasks.filter { $0.status == .completed }
+    }
+    
     init() {
         loadTasks()
         loadGoals()

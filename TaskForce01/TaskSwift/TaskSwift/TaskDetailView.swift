@@ -3,113 +3,102 @@ import SwiftUI
 public struct TaskDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var task: Task
-    @State private var isEditing = false
     @State private var editedTitle: String
     @State private var editedDescription: String
     @State private var editedDueDate: Date
-    @State private var editedPriority: TaskPriority
-    @State private var editedStatus: TaskStatus
-    @State private var editedGoal: String
-    
+
     public init(task: Task) {
         _task = State(initialValue: task)
         _editedTitle = State(initialValue: task.title)
         _editedDescription = State(initialValue: task.description)
         _editedDueDate = State(initialValue: task.dueDate)
-        _editedPriority = State(initialValue: task.priority)
-        _editedStatus = State(initialValue: task.status)
-        _editedGoal = State(initialValue: task.goal)
     }
-    
+
     public var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                // タイトル
-                TextField("タイトル", text: $editedTitle)
-                    .font(.title)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .disabled(!isEditing)
-                
-                // 説明
-                Text("説明")
+        ZStack {
+            Color.black.opacity(0.3).ignoresSafeArea()
+            VStack(spacing: 24) {
+                HStack {
+                    Button(action: { dismiss() }) {
+                        Image(systemName: "xmark")
+                            .font(.title)
+                            .foregroundColor(.gray)
+                    }
+                    Spacer()
+                }
+                .padding(.top)
+                Text("Goalの詳細")
+                    .font(.largeTitle).bold()
+                    .foregroundColor(.black)
+                Text("残り通知回数: \(task.remainingReminders)回")
                     .font(.headline)
+                    .foregroundColor(.black)
+                
+                Text("タイトル")
+                    .font(.headline)
+                    .foregroundColor(.black)
+                TextField("タイトル", text: $editedTitle)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.leading)
+                Text("詳細")
+                    .font(.headline)
+                    .foregroundColor(.black)
                 TextEditor(text: $editedDescription)
-                    .frame(minHeight: 100)
-                    .padding(4)
+                    .frame(height: 100)
                     .background(Color(.systemGray6))
                     .cornerRadius(8)
-                    .disabled(!isEditing)
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.leading)
+                Text("期限")
+                    .font(.headline)
+                    .foregroundColor(.black)
+                DatePicker("", selection: $editedDueDate, displayedComponents: [.date])
+                    .datePickerStyle(.compact)
                 
-                // 期限
-                DatePicker("期限", selection: $editedDueDate, displayedComponents: [.date, .hourAndMinute])
-                    .disabled(!isEditing)
-                
-                // 優先度
-                Picker("優先度", selection: $editedPriority) {
-                    ForEach(TaskPriority.allCases, id: \.self) { priority in
-                        Text(priority.rawValue).tag(priority)
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .disabled(!isEditing)
-                
-                // ステータス
-                Picker("ステータス", selection: $editedStatus) {
-                    ForEach(TaskStatus.allCases, id: \.self) { status in
-                        Text(status.rawValue).tag(status)
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .disabled(!isEditing)
-                
-                // 目標
-                TextField("目標", text: $editedGoal)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .disabled(!isEditing)
-                
-                if isEditing {
-                    Button(action: saveChanges) {
+                HStack {
+                    Button(action: { saveChanges() }) {
                         Text("保存")
+                            .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
+                            .background(Color(hex: "#343434"))
+                            .cornerRadius(8)
                     }
+                    .padding(.trailing, 8)
+                    Button(action: { toggleDone() }) {
+                        Text(task.status == .completed ? "未完了に戻す" : "完了にする")
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color(hex: "#343434"))
+                            .cornerRadius(8)
+                    }
+                    .padding(.leading, 8)
                 }
             }
             .padding()
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(isEditing ? "キャンセル" : "編集") {
-                    if isEditing {
-                        // 編集をキャンセル
-                        editedTitle = task.title
-                        editedDescription = task.description
-                        editedDueDate = task.dueDate
-                        editedPriority = task.priority
-                        editedStatus = task.status
-                        editedGoal = task.goal
-                    }
-                    isEditing.toggle()
-                }
-            }
+            .frame(maxWidth: 400)
+            .background(Color.white)
+            .cornerRadius(16)
+            .shadow(radius: 20)
+            .padding()
         }
     }
-    
+
     private func saveChanges() {
         task.title = editedTitle
         task.description = editedDescription
         task.dueDate = editedDueDate
-        task.priority = editedPriority
-        task.status = editedStatus
-        task.goal = editedGoal
-        isEditing = false
+        dismiss()
+    }
+
+    private func toggleDone() {
+        task.status = (task.status == .completed ? .notStarted : .completed)
+        dismiss()
     }
 }
 
 #Preview {
-    TaskDetailView(task: Task(title: "サンプルタスク", description: "これはサンプルタスクです", dueDate: Date()))
+    TaskDetailView(task: Task.sampleTasks.first!)
 } 

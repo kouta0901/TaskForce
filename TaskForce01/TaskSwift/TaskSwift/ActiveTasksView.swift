@@ -5,13 +5,14 @@ struct ActiveTasksView: View {
     @State private var showingAddTask = false
     
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(taskManager.activeTasks) { task in
-                    NavigationLink(destination: TaskDetailView(task: task)) {
-                        TaskCard(task: task)
-                    }
+        NavigationStack {
+            List(taskManager.activeTasks) { task in
+                NavigationLink(value: task) {
+                    TaskCard(task: task)
                 }
+            }
+            .navigationDestination(for: Task.self) { task in
+                TaskDetailView(task: task)
             }
             .navigationTitle("アクティブタスク")
             .toolbar {

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Task: Identifiable, Codable {
+public struct Task: Identifiable, Codable, Hashable {
     public let id: UUID
     public var title: String
     public var description: String
@@ -8,8 +8,12 @@ public struct Task: Identifiable, Codable {
     public var priority: TaskPriority
     public var status: TaskStatus
     public var goal: String
+    public var reminders: [Date] = []
+    public var remainingReminders: Int {
+        reminders.filter { $0 > Date() }.count
+    }
     
-    public init(id: UUID = UUID(), title: String, description: String, dueDate: Date, priority: TaskPriority = .medium, status: TaskStatus = .notStarted, goal: String = "") {
+    public init(id: UUID = UUID(), title: String, description: String, dueDate: Date, priority: TaskPriority = .medium, status: TaskStatus = .notStarted, goal: String = "", reminders: [Date] = []) {
         self.id = id
         self.title = title
         self.description = description
@@ -17,6 +21,18 @@ public struct Task: Identifiable, Codable {
         self.priority = priority
         self.status = status
         self.goal = goal
+        self.reminders = reminders
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(title)
+        hasher.combine(description)
+        hasher.combine(dueDate)
+        hasher.combine(priority)
+        hasher.combine(status)
+        hasher.combine(goal)
+        hasher.combine(reminders)
     }
 }
 

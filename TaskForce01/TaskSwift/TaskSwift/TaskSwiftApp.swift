@@ -28,8 +28,24 @@ struct TaskSwiftApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeView()
-                .preferredColorScheme(.dark)
+            TabView {
+                HomeView()
+                    .tabItem {
+                        Image(systemName: "house.fill")
+                        Text("Home")
+                    }
+                GoalView()
+                    .tabItem {
+                        Image(systemName: "target")
+                        Text("Goal")
+                    }
+                SettingsView()
+                    .tabItem {
+                        Image(systemName: "gearshape.fill")
+                        Text("Setting")
+                    }
+            }
+            .preferredColorScheme(.dark)
         }
     }
 }
